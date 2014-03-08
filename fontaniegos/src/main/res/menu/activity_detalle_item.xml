@@ -10,5 +10,7 @@
         android:id="@+id/action_share"
         NewsFuentes:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_share"
+        NewsFuentes:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         android:title="Share"/>
+
 </menu>
