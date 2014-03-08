@@ -87,6 +87,7 @@ public class ActivityDetalleItem extends ActionBarActivity {
         // Locate MenuItem with ShareActionProvider
         MenuItem item = menu.findItem(R.id.action_share);
 
+        // Get object ShareActionProvider with all app.
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         setShareIntent();
 
@@ -108,12 +109,10 @@ public class ActivityDetalleItem extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Somewhere in the application.
-    public void doShare(Intent shareIntent) {
-        // When you want to share set the share intent.
-        mShareActionProvider.setShareIntent(shareIntent);
-    }
-
+    /**
+     * Inicializa un objeto Intent con los datos que queremos compartir con otra aplicación
+     * y ejecuta el provider de la aplicación selecionada
+     */
     private void setShareIntent () {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setAction(Intent.ACTION_SEND);
