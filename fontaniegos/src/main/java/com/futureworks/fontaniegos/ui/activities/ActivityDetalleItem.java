@@ -87,16 +87,8 @@ public class ActivityDetalleItem extends ActionBarActivity {
         // Locate MenuItem with ShareActionProvider
         MenuItem item = menu.findItem(R.id.action_share);
 
-        // Fetch and store ShareActionProvider
-        mShareActionProvider = new ShareActionProvider(this);
-        MenuItemCompat.setActionProvider(item, mShareActionProvider);
-
-/*        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, this.item.getTitulo());
-
-        mShareActionProvider.setShareIntent(shareIntent);*/
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareIntent();
 
         return true;
     }
@@ -108,28 +100,11 @@ public class ActivityDetalleItem extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        Log.d("HHH", "Hola item menu");
-
         if (id == R.id.action_settings) {
 
-            Log.d("HHH", "Hola item menu 3 ");
-
             return true;
-        } else if (id == R.id.action_share) {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, this.item.getTitulo());
-
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(shareIntent);
-            }
-
-            Log.d("HHH", "Hola item menu 2");
-
-            return  true;
-
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -137,6 +112,17 @@ public class ActivityDetalleItem extends ActionBarActivity {
     public void doShare(Intent shareIntent) {
         // When you want to share set the share intent.
         mShareActionProvider.setShareIntent(shareIntent);
+    }
+
+    private void setShareIntent () {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, this.item.getTitulo());
+
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
 }
