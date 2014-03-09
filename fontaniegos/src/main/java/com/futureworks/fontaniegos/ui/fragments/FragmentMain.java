@@ -2,10 +2,8 @@ package com.futureworks.fontaniegos.ui.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.futureworks.fontaniegos.Model.Item;
+import com.futureworks.fontaniegos.helper.ConnectionDetector;
+import com.futureworks.fontaniegos.model.Item;
 import com.futureworks.fontaniegos.R;
 import com.futureworks.fontaniegos.ui.activities.ActivityDetalleItem;
 import com.futureworks.fontaniegos.ui.activities.MainActivity;
@@ -33,15 +33,16 @@ import java.util.ArrayList;
  */
 public class FragmentMain extends Fragment {
 
-    private static final String URL = "http://ayuntamientofuentes.com/novedades/";
-
-    private ArrayList<Item> list;
+    private ArrayList<Item>     list;
 
     //Variables de la UI
-    private ListView        listView;
-    private ItemsAdapter    mAdapter;
+    private ListView            listView;
+    private ItemsAdapter        mAdapter;
 
-    private MainActivity    mActivity;
+    private MainActivity        mActivity;
+
+    //Helpers
+    private ConnectionDetector  mConnectionDetector;
 
     @Override
     public void onAttach(Activity activity) {
@@ -56,6 +57,7 @@ public class FragmentMain extends Fragment {
 
         //Inicializacion de variables;
         list = new ArrayList<Item>();
+        this.mConnectionDetector = new ConnectionDetector(this.mActivity.getApplicationContext());
 
     }
 
@@ -81,7 +83,13 @@ public class FragmentMain extends Fragment {
             }
         });
 
-        new GetData().execute();
+        // Comprobamos si tiene el dispositivo conexión a internet
+        // Si devuelve "true" --> Si tiene
+        if (this.mConnectionDetector.isConnectingToInternet()) {
+            new GetData().execute();
+        } else {
+            Toast.makeText(this.mActivity.getApplicationContext(), R.string.conexion_internet, Toast.LENGTH_SHORT).show();
+        }
 
         return rootView;
     }

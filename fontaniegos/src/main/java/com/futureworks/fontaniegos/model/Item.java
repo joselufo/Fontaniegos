@@ -1,4 +1,4 @@
-package com.futureworks.fontaniegos.Model;
+package com.futureworks.fontaniegos.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

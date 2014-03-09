@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.futureworks.fontaniegos.Model.Item;
+import com.futureworks.fontaniegos.model.Item;
 import com.futureworks.fontaniegos.R;
 import com.squareup.picasso.Picasso;
 
