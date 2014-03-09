@@ -2,10 +2,8 @@ package com.futureworks.fontaniegos.ui.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.futureworks.fontaniegos.Model.Item;
+import com.futureworks.fontaniegos.model.Item;
 import com.futureworks.fontaniegos.R;
 import com.futureworks.fontaniegos.ui.activities.ActivityDetalleItem;
 import com.futureworks.fontaniegos.ui.activities.MainActivity;
